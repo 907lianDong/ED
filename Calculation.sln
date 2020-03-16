@@ -1,22 +1,214 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
-MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculation", "Calculation\Calculation.csproj", "{4103282A-566E-4B89-B161-563E2A5B47EB}"
-EndProject
-Global
-	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4103282A-566E-4B89-B161-563E2A5B47EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4103282A-566E-4B89-B161-563E2A5B47EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4103282A-566E-4B89-B161-563E2A5B47EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4103282A-566E-4B89-B161-563E2A5B47EB}.Release|Any CPU.Build.0 = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
-	EndGlobalSection
-EndGlobal
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Calculation
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Add A=new Add();Multiplication M=new Multiplication(); Subtraction Su=new Subtraction(); Sqrt Sq=new Sqrt();
+            Console.WriteLine("请选择1、数字，2、字符串");
+            int x = int.Parse(Console.ReadLine());
+            if (x == 1)
+            {
+                Console.WriteLine("请输入两个数字");
+                float c = 0;
+                float a = float.Parse(Console.ReadLine());
+                float b = float.Parse(Console.ReadLine());
+                A.Equals(a, b, c);
+                Console.WriteLine("加法结果为,{0}", A.add(a, b, c));
+
+                Su.Equals(a, b, c);
+                Console.WriteLine("减法结果为,{0}", Su.sub(a, b, c));
+
+                M.Equals(a, b, c);
+                Console.WriteLine("乘法结果为,{0}", M.Mul(a, b, c));
+
+                Sq.Equals(a, b, c);
+                Console.WriteLine("除法结果为,{0}", Sq.sqr(a, b, c));
+            }
+            else if (x == 2)
+            {
+                Console.WriteLine("请输入两个字符串");
+                
+                string a1="0"; string b1="0"; string c1="0";
+
+                a1 = Console.ReadLine();
+                b1 = Console.ReadLine();
+
+                Console.Write("加法结果为, ");
+                A.add2(a1, b1, c1);
+
+                Console.Write("减法结果为,");
+                Su.sub2(a1, b1);
+            }
+            
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Calculation
+{
+    class Subtraction
+    {
+        public float _a, _b, _c, t;
+        public float A { get { return _a; } set { _a = value; } }
+        public float B { get { return _b; } set { _b = value; } }
+        public float C { get { return _c; } set { _c = value; } }
+        public void Equals(float a, float b, float c)
+        {
+            if (a == b) Console.WriteLine("两数相等");
+            else Console.WriteLine("两数不相等");
+        }
+        
+        public float sub(float _a, float _b, float _c)
+        {
+            _c = _a - _b;
+            return _c;
+        }
+       
+        public void sub2(string a,string b)
+        {
+            char[] a1 = new char[a.Length];
+            char[] b1 = new char[b.Length];
+            char[] c1 = new char[a.Length];
+            for (int i = 0; i < (a.Length); i++)
+            {
+                a1[i] = a[i];
+            }
+            for (int i = 0; i < (b.Length); i++)
+            {
+                b1[i] = b[i];
+            }
+            int x = 0, y = 0;
+            for (int i = 0; i < (a.Length) && x < b.Length && y < a.Length; i++)
+            {
+                if (a1[i] != b1[x])
+                {
+                    c1[y] = a1[i];
+                    Console.Write(c1[y]);
+                    y++;
+                }
+
+                x++;
+            }
+        }
+    }
+    
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Calculation
+{
+    class Add
+    {
+        public float _a, _b, _c;
+        public float A { get { return _a; } set {  _a = value; } }
+        public float B { get { return _b; } set {  _b = value; } }
+        public float C { get { return _c; } set { _c = value; } }
+        public void Equals(float a, float b, float c)
+        {
+            if (a == b) Console.WriteLine("两数相等");
+            else Console.WriteLine("两数不相等");
+        }
+        public float add(float _a, float _b, float _c)
+        {
+            _c = _a + _b;
+            return _c;
+        }
+
+        public void add2(string a, string b, string c)
+        {
+            char[] a1 = new char[a.Length];
+            char[] b1 = new char[b.Length]; char[] c1 = new char[a.Length + b.Length];
+            for(int i = 0; i < (a.Length); i++)
+            {
+                a1[i] = a[i];
+            }
+            for (int i = 0; i < (b.Length); i++)
+            {
+                b1[i] = b[i];
+            }
+            for (int i=0;i<a.Length; i++)
+            {
+                c1[i] = a1[i];
+                Console.Write(c1[i]);
+            }
+            int j = 0;
+            for(int i = a.Length ; i <(a.Length+b.Length)&& j <b.Length; i++)
+            {
+
+                c1[i] = b1[j];
+                Console.Write(c1[i]);
+                j++;
+
+            }
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Calculation
+{
+    class Multiplication//乘法运算
+    {
+        public float _a, _b, _c;
+        public float A { get { return _a; } set { _a = value; } }
+        public float B { get { return _b; } set { _b = value; } }
+        public float C { get { return _c; } set { _c = value; } }
+        public void Equals(float a, float b, float c)
+        {
+            if (a == b) Console.WriteLine("两数相等");
+            else Console.WriteLine("两数不相等");
+        }
+        public float Mul(float _a, float _b, float _c)
+        {
+            _c = _a * _b;
+            return _c;
+        }
+    }
+}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Calculation
+{
+    class Sqrt
+    {
+        public float _a, _b, _c;
+        public float A { get { return _a; } set { _a = value; } }
+        public float B { get { return _b; } set { _b = value; } }
+        public float C { get { return _c; } set { _c = value; } }
+        public void Equals(float a, float b, float c)
+        {
+            if (a == b) Console.WriteLine("两数相等");
+            else Console.WriteLine("两数不相等");
+        }
+        public float sqr(float _a, float _b, float _c)
+        {
+            _c = _a / _b;
+            return _c;
+        }
+    }
+}
